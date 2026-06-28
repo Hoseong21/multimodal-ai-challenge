@@ -1,6 +1,10 @@
 def parse_prediction(output: str, answers: list[str], unknown_idx: int | None) -> int:
     """모델 출력 텍스트를 answers의 인덱스(0/1/2)로 변환."""
+    if not output:
+        return unknown_idx if unknown_idx is not None else 0
     text = output.strip().strip('"').strip("'").strip()
+    if not output:
+            print(f"  [빈 답] {row['sample_id']}")
     low = text.lower()
 
     # 1단계: 정확히 일치 (대소문자 무시)
